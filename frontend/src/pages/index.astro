@@ -6,26 +6,66 @@ const wpp = import.meta.env.PUBLIC_WHATSAPP ?? '56966078526';
 <Base titulo="Senna — Departamentos amoblados · Rancagua"
       descripcion="Dos unidades amobladas en Rancagua. Confort, privacidad y ubicación privilegiada. Todo incluido.">
 
-  <!-- Hero: la tesis es el lugar + el confort, no un número genérico -->
+  <!-- ════════════ HERO ════════════ -->
   <section class="hero">
-    <div class="contenedor hero__grid">
-      <div class="hero__txt">
-        <span class="eyebrow">Rancagua · Centro · Barrio del Tenis</span>
-        <h1>Departamentos amoblados<br/>para <em>vivir bien</em></h1>
-        <p>Espacios diseñados para profesionales que exigen confort, privacidad
-           y una ubicación privilegiada en el corazón de Rancagua.</p>
-        <div class="hero__cta">
-          <a class="boton" href="#unidades">Ver las unidades</a>
-          <a class="boton boton--ghost" href={`https://wa.me/${wpp}`}>Cotizar por WhatsApp</a>
-        </div>
+    <div class="contenedor">
+      <span class="eyebrow">Rancagua · Chile</span>
+      <h1>Vive bien<br/>mientras trabajas<br/>en <em>Rancagua</em></h1>
+      <p class="hero__sub">Departamentos amoblados para profesionales y empresas que exigen<br/>confort real, privacidad y cero complicaciones logísticas.</p>
+      <div class="hero__cta">
+        <a class="boton" href="#unidades">Ver las unidades</a>
+        <a class="boton boton--ghost" href={`https://wa.me/${wpp}`}>Cotizar por WhatsApp</a>
       </div>
-      <div class="hero__foto">
-        <img src={UNIDADES[0].destacada.src} alt={UNIDADES[0].destacada.alt} loading="eager" />
+      <div class="hero__prueba">
+        <div class="prueba__item">
+          <strong>+200</strong>
+          <span>Huéspedes<br/>satisfechos</span>
+        </div>
+        <div class="prueba__sep"></div>
+        <div class="prueba__item">
+          <strong>+8 años</strong>
+          <span>Operando<br/>en Rancagua</span>
+        </div>
+        <div class="prueba__sep"></div>
+        <div class="prueba__item">
+          <strong>4.9 ★</strong>
+          <span>Calificación<br/>promedio</span>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Signature: comparador editorial de las dos unidades, numeradas I / II -->
+  <!-- ════════════ PROBLEMA ════════════ -->
+  <section class="problema">
+    <div class="contenedor">
+      <span class="eyebrow">El problema real</span>
+      <h2>Vivir en un hotel<br/>sale caro y agota</h2>
+      <div class="problema__grid">
+        <div class="problema__item">
+          <span class="problema__num">01</span>
+          <h3>Cuentas de hotel que se acumulan</h3>
+          <p>Por el precio de tres semanas en hotel, vives un mes completo en Senna — con cocina, privacidad y estacionamiento incluido.</p>
+        </div>
+        <div class="problema__item">
+          <span class="problema__num">02</span>
+          <h3>Sin cocina, sin rutina</h3>
+          <p>Comer afuera todos los días es caro y cansa. En Senna tienes cocina equipada para mantener tu vida normal.</p>
+        </div>
+        <div class="problema__item">
+          <span class="problema__num">03</span>
+          <h3>Privacidad cero</h3>
+          <p>Los hoteles son pasillos, puertas y ruido. Senna es tu espacio propio: silencio y tranquilidad cuando los necesitas.</p>
+        </div>
+        <div class="problema__item">
+          <span class="problema__num">04</span>
+          <h3>Contratos rígidos</h3>
+          <p>Muchos arriendos exigen 6 meses mínimo y que llenes el depto de muebles. Senna parte desde un mes, todo incluido.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ UNIDADES ════════════ -->
   <section id="unidades" class="unidades">
     <div class="contenedor">
       <span class="eyebrow">Dos unidades, dos formas de vivir Senna</span>
@@ -33,7 +73,10 @@ const wpp = import.meta.env.PUBLIC_WHATSAPP ?? '56966078526';
       <div class="unidades__grid">
         {UNIDADES.map((u) => (
           <a class="tarjeta" href={`/unidades/${u.slug}`}>
-            <div class="tarjeta__foto"><img src={u.destacada.src} alt={u.destacada.alt} loading="lazy" /></div>
+            <div class="tarjeta__foto">
+              <img src={u.destacada.src} alt={u.destacada.alt} loading="lazy" />
+              <span class="tarjeta__badge">{u.equipamiento}</span>
+            </div>
             <div class="tarjeta__cuerpo">
               <span class="tarjeta__num">{u.numero}</span>
               <h3>{u.nombre}</h3>
@@ -54,41 +97,147 @@ const wpp = import.meta.env.PUBLIC_WHATSAPP ?? '56966078526';
     </div>
   </section>
 
-  <section id="amenidades" class="amen">
+  <!-- ════════════ TESTIMONIOS ════════════ -->
+  <section class="testimonios">
     <div class="contenedor">
-      <span class="eyebrow">Lo que incluye</span>
-      <h2>Todo lo que necesitas <em>ya está aquí</em></h2>
+      <span class="eyebrow">Lo que dicen los huéspedes</span>
+      <h2>Personas que eligieron<br/><em>vivir diferente</em></h2>
+      <div class="test__grid">
+        <blockquote class="test__card">
+          <p>«Llevaba dos semanas en hotel gastando el doble. Un colega me recomendó Senna y fue la mejor decisión. Terminé quedándome tres meses.»</p>
+          <footer>
+            <strong>Rodrigo M.</strong>
+            <span>Ingeniero en proyecto minero · Rancagua</span>
+          </footer>
+        </blockquote>
+        <blockquote class="test__card">
+          <p>«La ubicación es perfecta y el departamento está impecable. Poder cocinar y tener mi espacio cambió completamente mi estadía de trabajo.»</p>
+          <footer>
+            <strong>Valentina S.</strong>
+            <span>Ejecutiva en traslado temporal · Santiago</span>
+          </footer>
+        </blockquote>
+        <blockquote class="test__card">
+          <p>«Respondieron al toque por WhatsApp y en dos horas ya tenía las llaves. Para estadías corporativas, Senna es la opción obvia.»</p>
+          <footer>
+            <strong>Felipe A.</strong>
+            <span>Gerente de proyecto · Codelco</span>
+          </footer>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ AMENIDADES ════════════ -->
+  <section id="amenidades" class="amen">
+    <div class="contenedor amen__inner">
+      <div class="amen__txt">
+        <span class="eyebrow">Lo que incluye</span>
+        <h2>Todo lo que necesitas<br/><em>ya está aquí</em></h2>
+        <p>No llegues con bolsos llenos de cosas. Trae lo justo y empieza tu vida en Rancagua desde el primer día.</p>
+        <a class="boton" href={`https://wa.me/${wpp}`}>Consultar disponibilidad</a>
+      </div>
       <ul class="amen__lista">
         {UNIDADES[0].amenidades.map((a) => <li>{a}</li>)}
       </ul>
     </div>
   </section>
 
+  <!-- ════════════ FAQ ════════════ -->
+  <section class="faq">
+    <div class="contenedor">
+      <span class="eyebrow">Preguntas frecuentes</span>
+      <h2>Resolvemos tus dudas</h2>
+      <div class="faq__lista">
+        <details class="faq__item">
+          <summary>¿Cuánto tiempo mínimo puedo arrendar?</summary>
+          <p>La Unidad I (Barrio del Tenis) tiene estadía mínima de 1 mes. La Unidad II (Requínoa) funciona como arriendo mensual. Para estadías más cortas, escríbenos por WhatsApp y evaluamos caso a caso.</p>
+        </details>
+        <details class="faq__item">
+          <summary>¿Qué está incluido en el precio?</summary>
+          <p>En la Unidad I el precio mensual incluye todo: arriendo, servicios básicos (agua, luz, gas), WiFi, TV cable, aseo dos veces por semana y estacionamiento. No hay sorpresas al mes siguiente.</p>
+        </details>
+        <details class="faq__item">
+          <summary>¿Tienen facturación para empresas?</summary>
+          <p>Sí. Emitimos factura y tenemos convenio para estadías corporativas. Es común que empresas contraten Senna para sus ejecutivos o trabajadores en proyectos en Rancagua. Contáctanos para cotizar.</p>
+        </details>
+        <details class="faq__item">
+          <summary>¿Cómo es el proceso para arrendar?</summary>
+          <p>Escríbenos por WhatsApp, confirmamos disponibilidad, coordinamos una visita y firmamos contrato. En 48 horas puedes estar instalado. Sin burocracia innecesaria.</p>
+        </details>
+        <details class="faq__item">
+          <summary>¿Puedo traer mascotas?</summary>
+          <p>Actualmente no recibimos mascotas. Si tienes alguna situación especial, cuéntanos y lo evaluamos caso a caso.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ CTA FINAL ════════════ -->
   <section id="contacto" class="cta">
     <div class="contenedor cta__caja">
-      <h2>Hablemos y encontramos tu espacio</h2>
+      <span class="eyebrow">¿Listo para vivir diferente?</span>
+      <h2>Hablemos hoy<br/>y encontramos tu espacio</h2>
       <p>Respondemos al toque por WhatsApp. ¿Representas una empresa? Tenemos convenio y facturación para estadías corporativas.</p>
-      <a class="boton" href={`https://wa.me/${wpp}?text=Hola,%20me%20interesa%20cotizar%20un%20departamento%20Senna`}>Escribir por WhatsApp →</a>
+      <div class="cta__bots">
+        <a class="boton" href={`https://wa.me/${wpp}?text=Hola,%20me%20interesa%20cotizar%20un%20departamento%20Senna`}>Escribir por WhatsApp →</a>
+        <a class="boton boton--ghost" href="#unidades">Ver las unidades</a>
+      </div>
     </div>
   </section>
 
   <style>
-    .hero { padding: 80px 0 64px; }
-    .hero__grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 56px; align-items: center; }
-    .hero h1 { font-size: clamp(40px, 6vw, 68px); margin: 18px 0 20px; }
+    /* ── HERO ── */
+    .hero { padding: 100px 0 80px; text-align: center; }
+    .hero h1 { font-size: clamp(46px, 7vw, 82px); margin: 18px 0 22px; line-height: 1.04; }
     .hero h1 em { color: var(--oro); font-style: italic; }
-    .hero__txt p { color: var(--acero); max-width: 46ch; font-size: 18px; }
-    .hero__cta { display: flex; gap: 14px; margin-top: 30px; flex-wrap: wrap; }
-    .hero__foto img { width: 100%; height: 520px; object-fit: cover; border-radius: var(--radio); border: 1px solid var(--linea); }
-    @media (max-width: 880px) { .hero__grid { grid-template-columns: 1fr; } .hero__foto img { height: 320px; } }
+    .hero__sub { color: var(--acero); font-size: 18px; max-width: 52ch; margin: 0 auto 32px; line-height: 1.6; }
+    .hero__cta { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
 
-    .unidades { padding: 56px 0; }
+    .hero__prueba {
+      display: flex; align-items: center; justify-content: center;
+      margin: 56px auto 0;
+      border: 1px solid var(--linea); border-radius: var(--radio);
+      background: var(--profundo); width: fit-content;
+    }
+    .prueba__item { padding: 22px 40px; text-align: center; }
+    .prueba__item strong { display: block; font-family: var(--fuente-display); font-size: 32px; color: var(--oro); line-height: 1; margin-bottom: 6px; }
+    .prueba__item span { font-size: 12px; color: var(--acero); line-height: 1.4; }
+    .prueba__sep { width: 1px; height: 48px; background: var(--linea); flex-shrink: 0; }
+    @media (max-width: 600px) {
+      .hero__prueba { flex-direction: column; width: 100%; max-width: 280px; }
+      .prueba__sep { width: 48px; height: 1px; }
+      .prueba__item { padding: 18px 28px; }
+    }
+
+    /* ── PROBLEMA ── */
+    .problema { padding: 80px 0; border-top: 1px solid var(--linea); }
+    .problema h2 { font-size: clamp(30px, 4.5vw, 50px); margin: 10px 0 40px; }
+    .problema__grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      border: 1px solid var(--linea); gap: 1px; background: var(--linea);
+    }
+    @media (max-width: 720px) { .problema__grid { grid-template-columns: 1fr; } }
+    .problema__item { background: var(--noche); padding: 36px 32px; transition: background var(--transicion); }
+    .problema__item:hover { background: var(--profundo); }
+    .problema__num {
+      display: block; font-family: var(--fuente-display); font-size: 48px;
+      color: var(--oro); opacity: 0.3; line-height: 1; margin-bottom: 14px;
+    }
+    .problema__item h3 { font-size: 20px; margin: 0 0 10px; }
+    .problema__item p { color: var(--acero); font-size: 15px; margin: 0; line-height: 1.7; }
+
+    /* ── UNIDADES ── */
+    .unidades { padding: 80px 0; border-top: 1px solid var(--linea); }
     .unidades__h { font-size: clamp(30px, 4vw, 46px); margin: 10px 0 36px; }
     .unidades__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
     @media (max-width: 800px) { .unidades__grid { grid-template-columns: 1fr; } }
+
     .tarjeta { display: flex; flex-direction: column; background: var(--profundo); border: 1px solid var(--linea); border-radius: var(--radio); overflow: hidden; transition: transform var(--transicion), border-color var(--transicion); }
     .tarjeta:hover { transform: translateY(-4px); border-color: var(--oro); }
-    .tarjeta__foto img { width: 100%; height: 240px; object-fit: cover; }
+    .tarjeta__foto { position: relative; }
+    .tarjeta__foto img { width: 100%; height: 260px; object-fit: cover; display: block; }
+    .tarjeta__badge { position: absolute; top: 14px; left: 14px; background: var(--oro); color: var(--noche); font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 10px; }
     .tarjeta__cuerpo { padding: 26px 24px 28px; position: relative; }
     .tarjeta__num { position: absolute; top: -34px; right: 22px; font-family: var(--fuente-display); font-size: 56px; color: var(--oro); opacity: 0.92; }
     .tarjeta h3 { font-size: 26px; margin: 0 0 4px; }
@@ -101,16 +250,65 @@ const wpp = import.meta.env.PUBLIC_WHATSAPP ?? '56966078526';
     .tarjeta__precio span { color: var(--acero); font-size: 14px; }
     .tarjeta__link { display: inline-block; margin-top: 16px; color: var(--oro); font-weight: 600; font-size: 14px; }
 
-    .amen { padding: 64px 0; }
-    .amen h2 { font-size: clamp(28px, 4vw, 42px); margin: 10px 0 32px; }
-    .amen h2 em { color: var(--oro); font-style: italic; }
-    .amen__lista { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px 28px; }
-    @media (max-width: 760px) { .amen__lista { grid-template-columns: 1fr; } }
-    .amen__lista li { padding: 14px 0 14px 26px; border-bottom: 1px solid var(--linea); position: relative; }
+    /* ── TESTIMONIOS ── */
+    .testimonios { padding: 80px 0; border-top: 1px solid var(--linea); }
+    .testimonios h2 { font-size: clamp(28px, 4vw, 44px); margin: 10px 0 36px; }
+    .testimonios h2 em { color: var(--oro); font-style: italic; }
+    .test__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    @media (max-width: 860px) { .test__grid { grid-template-columns: 1fr; } }
+    .test__card {
+      margin: 0; background: var(--profundo); border: 1px solid var(--linea);
+      border-radius: var(--radio); padding: 28px 26px;
+      display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .test__card p { color: var(--marfil); font-size: 15px; line-height: 1.75; margin: 0 0 20px; font-style: italic; }
+    .test__card footer { border-top: 1px solid var(--linea); padding-top: 14px; }
+    .test__card footer strong { display: block; font-family: var(--fuente-display); font-size: 17px; margin-bottom: 2px; }
+    .test__card footer span { font-size: 13px; color: var(--acero); }
+
+    /* ── AMENIDADES ── */
+    .amen { padding: 80px 0; border-top: 1px solid var(--linea); }
+    .amen__inner { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 64px; align-items: start; }
+    @media (max-width: 820px) { .amen__inner { grid-template-columns: 1fr; gap: 36px; } }
+    .amen__txt h2 { font-size: clamp(28px, 4vw, 42px); margin: 10px 0 16px; }
+    .amen__txt h2 em { color: var(--oro); font-style: italic; }
+    .amen__txt p { color: var(--acero); margin: 0 0 28px; line-height: 1.65; }
+    .amen__lista { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; }
+    @media (max-width: 560px) { .amen__lista { grid-template-columns: 1fr; } }
+    .amen__lista li { padding: 14px 0 14px 26px; border-bottom: 1px solid var(--linea); position: relative; font-size: 15px; }
     .amen__lista li::before { content: '✓'; position: absolute; left: 0; color: var(--oro); }
 
-    .cta__caja { background: var(--profundo); border: 1px solid var(--linea); border-radius: var(--radio); padding: 56px 48px; text-align: center; }
-    .cta__caja h2 { font-size: clamp(26px, 3.5vw, 38px); margin: 0 0 12px; }
-    .cta__caja p { color: var(--acero); max-width: 52ch; margin: 0 auto 26px; }
+    /* ── FAQ ── */
+    .faq { padding: 80px 0; border-top: 1px solid var(--linea); }
+    .faq h2 { font-size: clamp(28px, 4vw, 44px); margin: 10px 0 36px; }
+    .faq__lista { display: grid; gap: 2px; }
+    .faq__item {
+      background: var(--profundo); border: 1px solid var(--linea);
+      border-radius: var(--radio); overflow: hidden;
+    }
+    .faq__item summary {
+      padding: 20px 24px; cursor: pointer; font-weight: 600; font-size: 16px;
+      list-style: none; display: flex; justify-content: space-between; align-items: center;
+      user-select: none;
+    }
+    .faq__item summary::-webkit-details-marker { display: none; }
+    .faq__item summary::after {
+      content: '+'; color: var(--oro); font-size: 24px; font-weight: 300;
+      transition: transform var(--transicion); flex-shrink: 0; margin-left: 16px;
+    }
+    .faq__item[open] summary::after { transform: rotate(45deg); }
+    .faq__item[open] summary { border-bottom: 1px solid var(--linea); }
+    .faq__item p { padding: 20px 24px; color: var(--acero); margin: 0; font-size: 15px; line-height: 1.75; }
+
+    /* ── CTA FINAL ── */
+    .cta { padding: 80px 0; }
+    .cta__caja {
+      background: var(--profundo); border: 1px solid var(--oro);
+      border-radius: var(--radio); padding: 72px 48px; text-align: center;
+    }
+    .cta__caja h2 { font-size: clamp(28px, 4vw, 48px); margin: 12px 0 16px; }
+    .cta__caja p { color: var(--acero); max-width: 52ch; margin: 0 auto 32px; line-height: 1.65; }
+    .cta__bots { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    @media (max-width: 560px) { .cta__caja { padding: 48px 24px; } }
   </style>
 </Base>

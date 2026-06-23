@@ -2,7 +2,6 @@
 import Base from '../../layouts/Base.astro';
 import { UNIDADES, porSlug } from '../../data/unidades.ts';
 
-// Prerendera una página estática por unidad (excelente para SEO).
 export function getStaticPaths() {
   return UNIDADES.map((u) => ({ params: { slug: u.slug } }));
 }
@@ -19,21 +18,22 @@ const consulta = encodeURIComponent(`Hola, me interesa la unidad ${u.nombre}. ¿
       <a href="/#unidades" class="volver">← Todas las unidades</a>
 
       <header class="ficha__head">
-        <span class="ficha__num">{u.numero}</span>
-        <div>
+        <div class="ficha__head-txt">
+          <span class="eyebrow">{u.ubicacion}</span>
           <h1>{u.nombre}</h1>
-          <p class="ficha__ubic">{u.ubicacion}</p>
         </div>
+        <span class="ficha__num">{u.numero}</span>
       </header>
 
       <div class="ficha__hero">
         <img src={u.destacada.src} alt={u.destacada.alt} loading="eager" />
+        <span class="ficha__badge">{u.equipamiento}</span>
       </div>
 
       <div class="ficha__grid">
         <div class="ficha__cuerpo">
           <p class="ficha__resumen">{u.resumen}</p>
-          <h2>Amenidades</h2>
+          <h2>Qué incluye</h2>
           <ul class="ficha__amen">
             {u.amenidades.map((a) => <li>{a}</li>)}
           </ul>
@@ -41,56 +41,107 @@ const consulta = encodeURIComponent(`Hola, me interesa la unidad ${u.nombre}. ¿
 
         <aside class="ficha__panel">
           <div class="ficha__precio">
-            <strong>{u.precio.monto}</strong><span>{u.precio.nota}</span>
+            <strong>{u.precio.monto}</strong>
+            <span>{u.precio.nota}</span>
           </div>
           <dl class="ficha__datos">
-            <div><dt>Distribución</dt><dd>{u.distribucion}</dd></div>
-            <div><dt>Equipamiento</dt><dd>{u.equipamiento}</dd></div>
-            <div><dt>Estadía mínima</dt><dd>{u.estadiaMinima}</dd></div>
+            <div>
+              <dt>Distribución</dt>
+              <dd>{u.distribucion}</dd>
+            </div>
+            <div>
+              <dt>Equipamiento</dt>
+              <dd>{u.equipamiento}</dd>
+            </div>
+            <div>
+              <dt>Estadía mínima</dt>
+              <dd>{u.estadiaMinima}</dd>
+            </div>
           </dl>
           <a class="boton" href={`https://wa.me/${wpp}?text=${consulta}`}>Consultar disponibilidad</a>
+          <p class="ficha__panel-nota">Respondemos en minutos por WhatsApp</p>
         </aside>
       </div>
 
-      <h2 class="ficha__galh">Galería</h2>
-      <div class="ficha__galeria">
-        {u.galeria.map((g) => <img src={g.src} alt={g.alt} loading="lazy" />)}
+      <div class="ficha__galeria-wrap">
+        <h2 class="ficha__galh">Galería</h2>
+        <div class="ficha__galeria">
+          {u.galeria.map((g) => <img src={g.src} alt={g.alt} loading="lazy" />)}
+        </div>
       </div>
     </div>
   </article>
 
+  <!-- CTA al final -->
+  <section class="cta-ficha">
+    <div class="contenedor cta-ficha__caja">
+      <h2>¿Te convence esta unidad?</h2>
+      <p>Escríbenos ahora y coordinamos una visita o confirmamos disponibilidad al momento.</p>
+      <a class="boton" href={`https://wa.me/${wpp}?text=${consulta}`}>Escribir por WhatsApp →</a>
+    </div>
+  </section>
+
   <style>
     .ficha { padding: 40px 0 0; }
-    .volver { color: var(--acero); font-size: 14px; }
+    .volver { color: var(--acero); font-size: 14px; transition: color var(--transicion); }
     .volver:hover { color: var(--oro); }
-    .ficha__head { display: flex; align-items: flex-end; gap: 20px; margin: 24px 0 28px; }
-    .ficha__num { font-family: var(--fuente-display); font-size: 80px; line-height: 0.8; color: var(--oro); }
-    .ficha__head h1 { font-size: clamp(32px, 5vw, 52px); margin: 0; }
-    .ficha__ubic { color: var(--acero); margin: 6px 0 0; }
-    .ficha__hero img { width: 100%; height: 460px; object-fit: cover; border-radius: var(--radio); border: 1px solid var(--linea); }
-    @media (max-width: 720px) { .ficha__hero img { height: 280px; } }
 
-    .ficha__grid { display: grid; grid-template-columns: 1.6fr 0.9fr; gap: 48px; margin: 48px 0; align-items: start; }
+    /* Cabecera */
+    .ficha__head { display: flex; align-items: flex-end; justify-content: space-between; margin: 28px 0 24px; }
+    .ficha__head-txt h1 { font-size: clamp(30px, 5vw, 52px); margin: 6px 0 0; }
+    .ficha__num { font-family: var(--fuente-display); font-size: 96px; line-height: 0.85; color: var(--oro); opacity: 0.25; }
+    @media (max-width: 600px) { .ficha__num { display: none; } }
+
+    /* Hero imagen */
+    .ficha__hero { position: relative; }
+    .ficha__hero img { width: 100%; height: 480px; object-fit: cover; border: 1px solid var(--linea); display: block; }
+    @media (max-width: 720px) { .ficha__hero img { height: 280px; } }
+    .ficha__badge {
+      position: absolute; top: 16px; left: 16px;
+      background: var(--oro); color: var(--noche);
+      font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 5px 12px;
+    }
+
+    /* Grid cuerpo + panel */
+    .ficha__grid { display: grid; grid-template-columns: 1.6fr 0.9fr; gap: 48px; margin: 48px 0 0; align-items: start; }
     @media (max-width: 820px) { .ficha__grid { grid-template-columns: 1fr; } }
-    .ficha__resumen { font-size: 19px; color: var(--marfil); margin: 0 0 32px; }
-    .ficha__cuerpo h2 { font-size: 26px; margin: 0 0 16px; }
-    .ficha__amen { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px 24px; }
+
+    .ficha__resumen { font-size: 19px; color: var(--marfil); margin: 0 0 36px; line-height: 1.7; }
+    .ficha__cuerpo h2 { font-size: 24px; margin: 0 0 18px; }
+    .ficha__amen { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
     @media (max-width: 560px) { .ficha__amen { grid-template-columns: 1fr; } }
-    .ficha__amen li { padding-left: 22px; position: relative; color: var(--acero); }
+    .ficha__amen li { padding: 12px 0 12px 24px; border-bottom: 1px solid var(--linea); position: relative; color: var(--acero); font-size: 15px; }
     .ficha__amen li::before { content: '✓'; position: absolute; left: 0; color: var(--oro); }
 
-    .ficha__panel { background: var(--profundo); border: 1px solid var(--linea); border-radius: var(--radio); padding: 28px 26px; position: sticky; top: 88px; }
-    .ficha__precio { display: flex; align-items: baseline; gap: 8px; padding-bottom: 20px; border-bottom: 1px solid var(--linea); margin-bottom: 20px; }
+    /* Panel lateral */
+    .ficha__panel {
+      background: var(--profundo); border: 1px solid var(--linea);
+      border-radius: var(--radio); padding: 28px 26px;
+      position: sticky; top: 88px;
+    }
+    .ficha__precio { display: flex; align-items: baseline; gap: 8px; padding-bottom: 20px; border-bottom: 1px solid var(--linea); margin-bottom: 20px; flex-wrap: wrap; }
     .ficha__precio strong { font-family: var(--fuente-display); font-size: clamp(30px, 5vw, 44px); color: var(--oro); }
     .ficha__precio span { color: var(--acero); font-size: 14px; }
-    .ficha__datos { margin: 0 0 24px; display: grid; gap: 14px; }
-    .ficha__datos dt { font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--acero); }
-    .ficha__datos dd { margin: 2px 0 0; }
+    .ficha__datos { margin: 0 0 24px; display: grid; gap: 16px; }
+    .ficha__datos dt { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--acero); }
+    .ficha__datos dd { margin: 3px 0 0; font-size: 15px; }
     .ficha__panel .boton { width: 100%; justify-content: center; }
+    .ficha__panel-nota { text-align: center; color: var(--acero); font-size: 13px; margin: 12px 0 0; }
 
-    .ficha__galh { font-size: 26px; margin: 16px 0 20px; }
-    .ficha__galeria { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; padding-bottom: 24px; }
+    /* Galería */
+    .ficha__galeria-wrap { margin-top: 56px; padding-bottom: 16px; }
+    .ficha__galh { font-size: 24px; margin: 0 0 20px; }
+    .ficha__galeria { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
     @media (max-width: 720px) { .ficha__galeria { grid-template-columns: 1fr 1fr; } }
-    .ficha__galeria img { width: 100%; height: 200px; object-fit: cover; border-radius: var(--radio); border: 1px solid var(--linea); }
+    .ficha__galeria img { width: 100%; height: 210px; object-fit: cover; border: 1px solid var(--linea); display: block; transition: opacity var(--transicion); }
+    .ficha__galeria img:hover { opacity: 0.85; }
+
+    /* CTA inferior */
+    .cta-ficha { padding: 64px 0 80px; }
+    .cta-ficha__caja { background: var(--profundo); border: 1px solid var(--oro); border-radius: var(--radio); padding: 56px 40px; text-align: center; }
+    .cta-ficha__caja h2 { font-size: clamp(24px, 3.5vw, 38px); margin: 0 0 12px; }
+    .cta-ficha__caja p { color: var(--acero); max-width: 48ch; margin: 0 auto 28px; }
+    @media (max-width: 560px) { .cta-ficha__caja { padding: 40px 20px; } }
   </style>
 </Base>
