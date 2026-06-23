@@ -1,0 +1,32 @@
+services:
+  api:
+    build: ./backend
+    env_file: .env
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      - redis
+    volumes:
+      - ./backend:/app
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+
+  db:
+    image: pgvector/pgvector:pg16   # Postgres + pgvector listo para el futuro
+    environment:
+      POSTGRES_USER: senna
+      POSTGRES_PASSWORD: senna
+      POSTGRES_DB: senna
+    ports:
+      - "5432:5432"
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+      - ./backend/sql:/docker-entrypoint-initdb.d   # corre el esquema al crear
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+volumes:
+  dbdata:

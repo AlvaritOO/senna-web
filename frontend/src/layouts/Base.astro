@@ -1,0 +1,53 @@
+---
+import '../styles/tokens.css';
+import ChatWidget from '../components/ChatWidget.svelte';
+const { titulo, descripcion } = Astro.props;
+const wpp = import.meta.env.PUBLIC_WHATSAPP ?? '56966078526';
+---
+<!doctype html>
+<html lang="es-CL">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{titulo}</title>
+  <meta name="description" content={descripcion} />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <header class="nav">
+    <div class="contenedor nav__row">
+      <a href="/" class="nav__marca">SENNA</a>
+      <nav class="nav__links">
+        <a href="/#unidades">Unidades</a>
+        <a href="/#amenidades">Amenidades</a>
+        <a href="/#contacto">Contacto</a>
+      </nav>
+      <a class="boton" href={`https://wa.me/${wpp}`}>Cotizar</a>
+    </div>
+  </header>
+
+  <slot />
+
+  <footer class="pie">
+    <div class="contenedor">
+      <span class="pie__marca">SENNA</span>
+      <p>© 2025 Senna Departamentos Amoblados · Rancagua, Chile</p>
+    </div>
+  </footer>
+
+  <ChatWidget client:idle wpp={wpp} />
+
+  <style>
+    .nav { position: sticky; top: 0; z-index: 50; background: rgba(15,25,35,0.82); backdrop-filter: blur(10px); border-bottom: 1px solid var(--linea); }
+    .nav__row { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+    .nav__marca { font-family: var(--fuente-display); font-size: 22px; letter-spacing: 0.18em; }
+    .nav__links { display: flex; gap: 28px; font-size: 14px; color: var(--acero); }
+    .nav__links a:hover { color: var(--marfil); }
+    @media (max-width: 720px) { .nav__links { display: none; } }
+    .pie { border-top: 1px solid var(--linea); margin-top: 96px; padding: 48px 0; color: var(--acero); font-size: 14px; }
+    .pie__marca { font-family: var(--fuente-display); letter-spacing: 0.18em; display: block; margin-bottom: 8px; color: var(--marfil); }
+  </style>
+</body>
+</html>

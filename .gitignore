@@ -1,0 +1,18 @@
+# Node / Astro
+node_modules/
+dist/
+.astro/
+.vercel/
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+# Entorno / secretos
+.env
+.env.local
+*.local
+# SO / editor
+.DS_Store
+.idea/
+.vscode/

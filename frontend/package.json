@@ -1,0 +1,19 @@
+{
+  "name": "senna-frontend",
+  "type": "module",
+  "version": "0.2.0",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "astro": "^4.16.0",
+    "@astrojs/svelte": "^5.7.0",
+    "svelte": "^4.2.19"
+  },
+  "devDependencies": {
+    "vitest": "^2.1.0"
+  }
+}
